@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Obirin2020 chat</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <ul id="chats"></ul>
+    <form id="form">
+      <input type="text" name="q1"><br>
+      <input type="text" name="q2"><br>
+      <input type="text" name="q3"><br>
+      <input type="text" name="q4"><br>
+      <input type="text" name="q5"><br>
+      <input type="text" name="q6"><br>
+      <input type="text" name="q7"><br>
+      <input type="text" name="q8"><br>
+      <button>送信</button>
+    </form>
+  <script>
+    const socketio = io();
+    const form = document.getElementById("form");
+    const chats = document.getElementById("chats");
+
+    $('button').on('click', function() {
+      socketio.emit('master', {
+        "q1": $("input[name=q1]").val(),
+        "q2": $("input[name=q2]").val(),
+        "q3": $("input[name=q3]").val(),
+        "q4": $("input[name=q4]").val(),
+        "q5": $("input[name=q5]").val(),
+        "q6": $("input[name=q6]").val(),
+        "q7": $("input[name=q7]").val(),
+        "q8": $("input[name=q8]").val(),
+      });
+      event.preventDefault();
+    })
+
+  </script>
+</body>
+</html>

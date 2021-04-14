@@ -1,0 +1,34 @@
+*
+{
+    box-sizing: border-box;
+}
+input,
+button
+{
+    border:1px solid #ccc;
+    font-size:5vw;
+    line-height:7vw;
+    height:10vw;
+    padding:0 5vw;
+    outline: 0;
+}
+input
+{
+    border-radius:5vw;
+}
+button
+{
+    border-radius:5vw;
+}
+#chats
+{
+    font-size:5vw;
+    display: block;
+    list-style: none;
+}
+#chats div {
+    background-color: #ccc;
+    height: 5vw;
+    margin-right:2vw;
+    display: inline-block;
+}

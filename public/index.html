@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Obirin2020 chat</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <ul id="chats"></ul>
+    <form id="form">
+      設問待ち…
+    </form>
+  <script>
+    const socketio = io();
+    const form = document.getElementById("form");
+    const chats = document.getElementById("chats");
+
+    function init(){
+      $('button').off('click');
+      $('button').on('click', function() {
+        socketio.emit('message', $(this).val());
+        event.preventDefault();
+      })
+    }
+
+    socketio.on('master',function(data){
+      $("#chats").empty();
+      $("#form").empty();
+      Object.keys(data).forEach(function (key) {
+        if(data[key] !== ''){
+          $("#form").append('<button value="'+data[key]+'">'+data[key]+'</button>');
+        }
+      });
+      init();
+    });
+
+    socketio.on('message',function(data){
+      $("#chats").empty();
+      Object.keys(data).forEach(function (key) {
+        const li = document.createElement("li");
+        $(li).append('<div class="bar" style="width:'+ (data[key] * 2) +'vw"></div>' + key);
+        chats.append(li);
+      });
+    });
+  </script>
+</body>
+</html>
