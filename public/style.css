@@ -19,6 +19,7 @@ input
 button
 {
     border-radius:5vw;
+    margin:.5vw;
 }
 #chats
 {
